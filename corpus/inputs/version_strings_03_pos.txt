@@ -1,0 +1,1 @@
+Forensics recovered the dropper from a scheduled task on the affected server. The sample calls back to 146.70.38.112 and matches the SHA-256 d4eecfd93dc61dd365ef4c5b2e1bad2b959fa823efc2c3aa197f60b586974be0 seen in prior intrusions. No other persistence mechanisms were identified.

@@ -1,0 +1,1 @@
+Once imported, the package phones home to npm-telemetry-collector.org and posts the developer's environment variables. The malicious build was signed and shipped with SHA-256 875aab3fb9824bca9a3d5744ca9b3a55c11f86adaaa7406a987e3f0f667943a5. Investigators also flagged a hardcoded fallback at 91.201.66.18.

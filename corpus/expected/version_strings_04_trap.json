@@ -1,0 +1,12 @@
+{
+  "ipv4": [
+    "185[.]220[.]101[.]44"
+  ],
+  "domains": [
+    "mail-verify-secure[.]com"
+  ],
+  "urls": [
+    "hxxps://mail-verify-secure[.]com/update/portal.php"
+  ],
+  "hashes": []
+}

@@ -1,0 +1,1 @@
+After initial access, the operator staged a beacon that called back to 45.146.165.37 over TCP 443. Analysts confirmed the same host relayed follow-on commands to the external relay at 193.142.146.204 within the hour. Both addresses were sinkholed the following day.

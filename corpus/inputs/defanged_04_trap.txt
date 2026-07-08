@@ -1,0 +1,1 @@
+The implant retrieved its configuration from hxxps://beacon-hub[.]live/api/v2/checkin every ten minutes. On disk the settings were stored in a file named config[.]v2[.]json under the user profile directory. Defenders blocked the URL at the proxy to contain the beacon.

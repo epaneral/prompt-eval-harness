@@ -1,0 +1,1 @@
+Telemetry showed the implant checking in to 146.70.199.88 every ninety seconds. On hosts that failed DHCP, the malware fell back to a self-assigned link-local address of 169.254.23.140 and attempted peer discovery on the local segment. The external C2 was shared with partner teams.

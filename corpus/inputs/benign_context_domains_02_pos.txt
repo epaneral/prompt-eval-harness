@@ -1,0 +1,1 @@
+The dropper pulls its second stage from hxxps://cdn-github-raw.io/assets/loader.bin and writes it to the temp directory. Reverse engineers tied the sample to SHA-1 3f2585b2383889d9f6f443eb2d4831a0ed26a95b. The same host served phishing lures earlier in the campaign.

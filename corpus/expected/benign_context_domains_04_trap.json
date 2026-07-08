@@ -1,0 +1,14 @@
+{
+  "ipv4": [
+    "146[.]70[.]115[.]9"
+  ],
+  "domains": [
+    "mssecure-update-svc[.]com"
+  ],
+  "urls": [
+    "hxxps://mssecure-update-svc[.]com/v2/check"
+  ],
+  "hashes": [
+    "60b42f0824734601574acdb43b2b2c0a3b62f43d"
+  ]
+}

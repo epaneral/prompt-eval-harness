@@ -1,0 +1,1 @@
+The Paletrace phishing kit served credential-harvesting pages from login-paletrace[.]com and dropped a helper binary with SHA-256 af898bd9bae1ef2fe746d17ae1268588696435877b44ac3baffb5c3820db1b9a. Harvested credentials were POSTed to 146.70.199.85. Block the domain and the collection IP.

@@ -1,0 +1,1 @@
+The exfiltration script uploaded staged archives to 91.132.58.19, which resolved to the actor-controlled domain vault-sync-cdn.net. A quoted proxy log recorded the internal source of the session: "CONNECT vault-sync-cdn.net:443 from 10.44.12.9". The domain was taken down after reporting.

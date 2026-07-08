@@ -1,0 +1,1 @@
+The phishing lure directed victims to phish-portal77(.)com where credentials were harvested. Victims received an attachment named invoice[.]pdf that dropped setup(.)exe into the temp directory. Exfiltration traffic was later tied to update-relay[.]org.

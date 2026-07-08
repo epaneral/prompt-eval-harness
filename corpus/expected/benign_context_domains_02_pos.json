@@ -1,0 +1,12 @@
+{
+  "ipv4": [],
+  "domains": [
+    "cdn-github-raw[.]io"
+  ],
+  "urls": [
+    "hxxps://cdn-github-raw[.]io/assets/loader.bin"
+  ],
+  "hashes": [
+    "3f2585b2383889d9f6f443eb2d4831a0ed26a95b"
+  ]
+}

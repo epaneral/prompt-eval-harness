@@ -1,0 +1,1 @@
+The second-stage payload was pulled from hXXp://stage-loader[.]xyz/dl/a.bin and then registered with its controller. Telemetry showed live callbacks to the domain cdn-sync.info alongside a second node at 146[.]70[.]111[.]9. Both channels remained active throughout the intrusion.

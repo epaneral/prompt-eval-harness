@@ -1,0 +1,1 @@
+The intrusion set delivered a second-stage implant whose dropper carries the MD5 a0c7d4f3140e9f13469e7c5ad25d3fe2, tracked internally under campaign UUID 76316181-8dac-41e5-b5c0-e0833a8ae487. Command-and-control traffic resolved to grip-analytics[.]org and exfiltrated to 45.142.212.19. Both indicators were seen across three unrelated victims.

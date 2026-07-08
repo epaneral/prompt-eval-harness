@@ -1,0 +1,1 @@
+The implant retrieved its configuration from hxxps://beacon-hub[.]live/api/v2/checkin every ten minutes. The dropped binary carried the SHA-256 044bdf0f77b9a1df8dfdb52415ee6ad5bbc387a8e6f9ea02a7df29e22f337abb. Defenders blocked the URL at the proxy to contain the beacon.

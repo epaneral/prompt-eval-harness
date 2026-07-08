@@ -1,0 +1,1 @@
+The threat actor uploaded the poisoned package to registry.npmjs.org under a name typosquatting a popular logger. Once imported, it phones home to npm-telemetry-collector.org and posts the developer's environment variables. The malicious build carried SHA-256 875aab3fb9824bca9a3d5744ca9b3a55c11f86adaaa7406a987e3f0f667943a5, with a hardcoded fallback at 91.201.66.18.

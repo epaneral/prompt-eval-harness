@@ -1,0 +1,12 @@
+{
+  "ipv4": [],
+  "domains": [
+    "cdn-refresh-static[.]com"
+  ],
+  "urls": [
+    "hxxps://cdn-refresh-static[.]com/pack/loader.bin"
+  ],
+  "hashes": [
+    "80daa4867214a8814a88e76a862262a16e074c4cd82c3da1e44d8af49d3bf93a"
+  ]
+}

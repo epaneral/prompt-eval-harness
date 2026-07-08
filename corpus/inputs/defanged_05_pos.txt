@@ -1,0 +1,1 @@
+Command-and-control was hosted at 193[.]29[.]104[.]66 with a fallback at delivery-cache(.)net. The operator rotated between the two endpoints hourly to evade blocklists. Both indicators were confirmed across three separate victim environments.

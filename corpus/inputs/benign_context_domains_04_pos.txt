@@ -1,0 +1,1 @@
+The implant masquerades as a Windows update client and beacons to hxxps://mssecure-update-svc.com/v2/check over TLS. The signed loader matches SHA-1 60b42f0824734601574acdb43b2b2c0a3b62f43d. Its configuration also lists a bare C2 IP of 146.70.115.9.

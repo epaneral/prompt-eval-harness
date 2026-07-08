@@ -1,0 +1,1 @@
+During triage the analysts confirmed the victim web server was running Apache 2.4.41.1 behind an outdated reverse proxy. Despite that, outbound TLS sessions from the box repeatedly resolved to the C2 at 45.129.14.203 on port 443. The web shell had been dropped into the public document root earlier that week.

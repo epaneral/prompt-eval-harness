@@ -1,0 +1,1 @@
+The dropper retrieved its second stage from hxxps://cdn-refresh-static.com/pack/loader.bin, matching SHA-256 80daa4867214a8814a88e76a862262a16e074c4cd82c3da1e44d8af49d3bf93a. It then spawned a local listener bound to 127.0.0.1 and exposed a panel at hxxp://192.168.1.10/admin for hands-on-keyboard tasking. The download host was later blocklisted.

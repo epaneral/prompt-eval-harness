@@ -1,0 +1,1 @@
+The loader retrieved its second stage from an attacker-controlled staging host fronted by nginx 1.18.0.2 according to the server banner. Network capture showed a GET request to cdn-sync-panel[.]net resolving to 91.242.219.7. Both indicators were added to the blocklist after confirmation.

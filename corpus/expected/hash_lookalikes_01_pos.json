@@ -1,0 +1,14 @@
+{
+  "ipv4": [
+    "185[.]216[.]71[.]44"
+  ],
+  "domains": [
+    "cdn-silverquill[.]net"
+  ],
+  "urls": [
+    "hxxps://cdn-silverquill[.]net/loader.bin"
+  ],
+  "hashes": [
+    "053d2bcc2f45bd87e5570b3b0ce4bcbdd0b62ea6"
+  ]
+}

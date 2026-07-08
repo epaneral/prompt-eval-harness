@@ -1,0 +1,1 @@
+During triage the analysts confirmed the compromised host was beaconing to a hardcoded command-and-control server. Outbound TLS sessions repeatedly resolved to 45.129.14.203 on port 443. The web shell had been dropped into the public document root earlier that week.

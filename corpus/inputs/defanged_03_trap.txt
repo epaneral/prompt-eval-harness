@@ -1,0 +1,1 @@
+The second-stage payload was pulled from hXXp://stage-loader[.]xyz/dl/a.bin and then registered with its controller [1]. Prior reporting attributed this tooling to the same cluster [2], though attribution remains low-confidence. The download URL was the only network indicator recovered from the host.

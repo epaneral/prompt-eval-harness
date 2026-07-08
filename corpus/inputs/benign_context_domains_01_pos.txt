@@ -1,0 +1,1 @@
+The trojanized wheel beacons to its operator at pypi-secure-mirror.net every fifteen minutes over HTTPS. Analysts recovered the loader with MD5 9a12cdd17cd9e8392164c7ea45466baf and confirmed it resolves the C2 host from a hardcoded string. A secondary staging server at 45.153.240.17 held the exfil archives.

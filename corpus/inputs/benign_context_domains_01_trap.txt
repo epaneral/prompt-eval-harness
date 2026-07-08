@@ -1,0 +1,1 @@
+The trojanized wheel beacons to its operator at pypi-secure-mirror.net every fifteen minutes over HTTPS, and the dropped loader carries MD5 9a12cdd17cd9e8392164c7ea45466baf. To remediate, uninstall the fake package and reinstall the legitimate one with 'pip install requests' from pypi.org. A secondary staging server at 45.153.240.17 held the exfil archives.

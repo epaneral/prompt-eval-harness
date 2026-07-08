@@ -1,0 +1,13 @@
+{
+  "ipv4": [
+    "146[.]70[.]111[.]9"
+  ],
+  "domains": [
+    "cdn-sync[.]info",
+    "stage-loader[.]xyz"
+  ],
+  "urls": [
+    "hxxp://stage-loader[.]xyz/dl/a.bin"
+  ],
+  "hashes": []
+}

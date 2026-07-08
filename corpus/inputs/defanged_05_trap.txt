@@ -1,0 +1,1 @@
+Command-and-control was hosted at 193[.]29[.]104[.]66 with a fallback at delivery-cache(.)net. The malware fingerprinted the OS and only ran on builds at or above 10[.]0[.]19045 before deploying its payload. Both C2 indicators were confirmed across three separate victim environments.

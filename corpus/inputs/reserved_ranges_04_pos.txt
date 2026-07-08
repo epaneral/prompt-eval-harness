@@ -1,0 +1,1 @@
+Telemetry showed the implant checking in to 146.70.199.88 every ninety seconds, with a fallback channel to update-mirror-svc.org. When the primary node went dark, the beacon rotated to the fallback domain automatically. Both indicators were shared with partner teams.

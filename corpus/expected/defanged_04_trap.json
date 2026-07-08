@@ -1,0 +1,10 @@
+{
+  "ipv4": [],
+  "domains": [
+    "beacon-hub[.]live"
+  ],
+  "urls": [
+    "hxxps://beacon-hub[.]live/api/v2/checkin"
+  ],
+  "hashes": []
+}
