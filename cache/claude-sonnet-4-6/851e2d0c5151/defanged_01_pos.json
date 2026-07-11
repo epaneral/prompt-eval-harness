@@ -1,0 +1,10 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
+  "case_id": "defanged_01_pos",
+  "response_text": "{\"ipv4\": [\"45[.]132[.]19[.]77\"], \"domains\": [\"malwaredrop45[.]net\"], \"urls\": [\"hxxp://malwaredrop45[.]net/panel/login.php\"], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 558,
+    "output_tokens": 62
+  }
+}
