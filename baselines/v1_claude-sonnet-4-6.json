@@ -4,12 +4,13 @@
   "model": "claude-sonnet-4-6",
   "temperature": 0.0,
   "max_tokens": 1024,
-  "created_at": "2026-07-11T02:55:34+00:00",
+  "created_at": "2026-07-11T03:22:52+00:00",
   "schema_validity_rate": 1.0,
   "schema_invalid_cases": [],
-  "total_cost_usd": 0.120732,
-  "api_calls": 44,
-  "cache_hits": 0,
+  "fence_normalized_cases": [],
+  "total_cost_usd": 0.0,
+  "api_calls": 0,
+  "cache_hits": 44,
   "report": {
     "per_type": {
       "ipv4": {

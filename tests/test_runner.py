@@ -4,9 +4,10 @@ Every design decision encoded here is documented in harness/runner.py's
 module docstring. The rules under test:
 
   * caching is structural -- a cache hit costs nothing and skips the API;
-  * parsing is strict -- fenced or chatty output is a contract violation,
-    not something to repair, so it must fail parsing and surface in the
-    schema-validity number;
+  * parsing applies ONE documented transport normalization (a whole-payload
+    markdown fence is stripped and counted, not failed -- owner decision at
+    Checkpoint 2) and is otherwise strict: prose, partial fences, and
+    schema violations still fail;
   * a schema-invalid response grades as an EMPTY extraction (every
     expected indicator becomes a miss);
   * the cost cap is a hard abort on cumulative NEW spend;
@@ -35,6 +36,7 @@ from harness.runner import (
     parse_output,
     prompt_sha256,
     run_corpus,
+    strip_transport_fence,
     write_baseline,
 )
 
@@ -160,10 +162,54 @@ def test_parse_output_tolerates_surrounding_whitespace() -> None:
     assert parse_output("  \n\t" + VALID_JSON + "\n  ") is not None
 
 
-def test_parse_output_rejects_json_fence() -> None:
-    # No fence forgiveness: a fenced payload is a contract violation.
+def test_parse_output_alone_rejects_json_fence() -> None:
+    # parse_output itself stays strict; fence handling is a separate,
+    # documented normalization layer applied before it.
     fenced = "```json\n" + VALID_JSON + "\n```"
     assert parse_output(fenced) is None
+
+
+# --- 4b. strip_transport_fence: the one documented normalization -------------
+
+
+def test_strip_fence_whole_payload_json_tag() -> None:
+    body, fenced = strip_transport_fence("```json\n" + VALID_JSON + "\n```")
+    assert fenced is True
+    assert body == VALID_JSON
+    assert parse_output(body) is not None
+
+
+def test_strip_fence_whole_payload_bare_fence() -> None:
+    body, fenced = strip_transport_fence("```\n" + VALID_JSON + "\n```")
+    assert fenced is True
+    assert body == VALID_JSON
+
+
+def test_strip_fence_tolerates_surrounding_whitespace() -> None:
+    body, fenced = strip_transport_fence("\n  ```json\n" + VALID_JSON + "\n```  \n")
+    assert fenced is True
+    assert body == VALID_JSON
+
+
+def test_strip_fence_leaves_unfenced_text_alone() -> None:
+    body, fenced = strip_transport_fence(VALID_JSON)
+    assert fenced is False
+    assert body == VALID_JSON
+
+
+def test_strip_fence_does_not_normalize_prose_around_fence() -> None:
+    # The line is precise: only a fence wrapping the ENTIRE payload counts.
+    text = "Here you go:\n```json\n" + VALID_JSON + "\n```"
+    body, fenced = strip_transport_fence(text)
+    assert fenced is False
+    assert body == text
+
+
+def test_strip_fence_does_not_normalize_partial_fence() -> None:
+    text = "```json\n" + VALID_JSON  # opening fence only
+    body, fenced = strip_transport_fence(text)
+    assert fenced is False
+    assert body == text
 
 
 def test_parse_output_rejects_prose_wrapped_json() -> None:
@@ -303,6 +349,7 @@ def test_run_corpus_happy_path(
     assert stub.calls == 2
     assert result.schema_validity_rate == 1.0
     assert result.schema_invalid_cases == []
+    assert result.fence_normalized_cases == []
     assert result.report.exact_match_rate == 1.0
     # Hand-computed: two calls at cost_usd(sonnet, 100, 40) each.
     per_call = cost_usd("claude-sonnet-4-6", 100, 40)
@@ -370,6 +417,24 @@ def test_run_corpus_schema_invalid_grades_as_empty(
     assert by_id["defanged_01_trap"].exact_match is True
 
 
+def test_run_corpus_fenced_response_normalized_and_counted(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """A whole-payload fence is stripped, graded normally, and counted."""
+    monkeypatch.setattr(runner, "CACHE_DIR", tmp_path / "cache")
+    corpus = _build_corpus(tmp_path)
+    fenced = "```json\n" + VALID_JSON + "\n```"
+    stub = _ScriptedCall(CachedResponse(fenced, input_tokens=100, output_tokens=40))
+    monkeypatch.setattr(runner, "_call_api", stub)
+
+    result = run_corpus(None, "claude-sonnet-4-6", "prompt v1", corpus)
+
+    assert result.schema_validity_rate == 1.0
+    assert result.schema_invalid_cases == []
+    assert result.fence_normalized_cases == ["defanged_01_pos", "defanged_01_trap"]
+    assert result.report.exact_match_rate == 1.0
+
+
 def test_run_corpus_cost_cap_aborts(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -426,6 +491,7 @@ def test_write_baseline(
     assert payload["prompt_sha256"] == prompt_sha256("prompt v1")
     assert payload["model"] == "claude-sonnet-4-6"
     assert payload["schema_validity_rate"] == 1.0
+    assert payload["fence_normalized_cases"] == []
 
     report = payload["report"]
     assert "per_type" in report

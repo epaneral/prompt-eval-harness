@@ -8,11 +8,15 @@ grades from fixtures with no API key, and CI only spends money when the
 prompt or corpus actually changed. A cache hit costs nothing and cannot
 trip the cost cap.
 
-Parsing is strict. The prompt's output contract says "exactly one JSON
-object, no fences, no commentary" -- so the raw response text (whitespace
-aside) must parse and validate as-is. No fence-stripping, no repair: a
-fenced or chatty response is a contract violation and must show up in the
-schema-validity number, not be silently graded away.
+Parsing applies one documented TRANSPORT NORMALIZATION, then is strict.
+A markdown code fence wrapping the entire payload is form, not content --
+the same distinction the grader draws when it canonicalizes defanged
+indicators -- so exactly one whole-payload fence is stripped before
+validation (owner decision, Checkpoint 2). Nothing else is repaired:
+prose around the JSON, partial fences, or commentary still fail. The
+count of fence-normalized responses is reported (report-only) so a
+change in a model's framing behavior stays visible without being
+treated as a failure.
 
 A schema-invalid response grades as an EMPTY extraction: an output the
 harness cannot parse extracts nothing, so every expected indicator counts
@@ -31,6 +35,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -79,6 +84,7 @@ class RunResult:
     report: Report
     schema_invalid_cases: list[str]
     schema_validity_rate: float
+    fence_normalized_cases: list[str]
     total_cost_usd: float
     api_calls: int
     cache_hits: int
@@ -153,8 +159,22 @@ def fetch_response(
     return response, False
 
 
+# Exactly one fence wrapping the entire payload, optional info string
+# (```json). Anything less total -- prose before/after, partial fences --
+# deliberately does not match and remains schema-invalid.
+_FENCE = re.compile(r"^```[a-zA-Z0-9_-]*[ \t]*\n(.*?)\n?```$", re.DOTALL)
+
+
+def strip_transport_fence(text: str) -> tuple[str, bool]:
+    """Remove one whole-payload markdown fence; report whether one was found."""
+    match = _FENCE.match(text.strip())
+    if match:
+        return match.group(1), True
+    return text, False
+
+
 def parse_output(text: str) -> IOCExtraction | None:
-    """Strictly parse a model response against the output contract, else None."""
+    """Strictly parse a (transport-normalized) response body, else None."""
     try:
         return IOCExtraction.model_validate_json(text.strip())
     except ValidationError:
@@ -172,6 +192,7 @@ def run_corpus(
     specs = load_manifest(corpus_dir / "manifest.yaml")
     triples = []
     schema_invalid: list[str] = []
+    fence_normalized: list[str] = []
     spent = 0.0
     api_calls = 0
     cache_hits = 0
@@ -190,7 +211,10 @@ def run_corpus(
                 raise CostCapExceeded(
                     f"spent ${spent:.4f} after {api_calls} calls; cap is ${COST_CAP_USD:.2f}"
                 )
-        actual = parse_output(response.response_text)
+        body, fenced = strip_transport_fence(response.response_text)
+        if fenced:
+            fence_normalized.append(spec.id)
+        actual = parse_output(body)
         if actual is None:
             schema_invalid.append(spec.id)
             actual = IOCExtraction(ipv4=[], domains=[], urls=[], hashes=[])
@@ -199,6 +223,7 @@ def run_corpus(
         report=grade_corpus(triples),
         schema_invalid_cases=sorted(schema_invalid),
         schema_validity_rate=1 - len(schema_invalid) / len(specs),
+        fence_normalized_cases=sorted(fence_normalized),
         total_cost_usd=spent,
         api_calls=api_calls,
         cache_hits=cache_hits,
@@ -216,6 +241,7 @@ def write_baseline(prompt_path: Path, prompt_text: str, model: str, result: RunR
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "schema_validity_rate": result.schema_validity_rate,
         "schema_invalid_cases": result.schema_invalid_cases,
+        "fence_normalized_cases": result.fence_normalized_cases,
         "total_cost_usd": round(result.total_cost_usd, 6),
         "api_calls": result.api_calls,
         "cache_hits": result.cache_hits,
@@ -240,6 +266,10 @@ def print_summary(result: RunResult, model: str, prompt_path: Path) -> None:
     )
     invalid = ", ".join(result.schema_invalid_cases) or "none"
     print(f"schema validity: {result.schema_validity_rate:.1%}   invalid: {invalid}")
+    print(
+        f"transport-normalized (whole-payload fence stripped): "
+        f"{len(result.fence_normalized_cases)}/{len(report.cases)}"
+    )
     print(f"exact-match rate: {report.exact_match_rate:.1%}")
     print("per-type (micro-averaged):")
     for t, m in report.per_type.items():
