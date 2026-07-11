@@ -43,12 +43,16 @@ from harness.schema import IOCExtraction, load_manifest
 
 # USD per million tokens (input, output). A model must have a pricing entry
 # before the runner will call it: the cost cap cannot be enforced otherwise.
-# Both allowed models accept temperature=0; models without sampling controls
-# (Opus 4.7+) would need a different request shape and are deliberately absent.
 MODEL_PRICING: dict[str, tuple[float, float]] = {
     "claude-sonnet-4-6": (3.00, 15.00),
     "claude-haiku-4-5": (1.00, 5.00),
+    "claude-opus-4-8": (5.00, 25.00),
 }
+# Opus 4.7+ removed sampling parameters: a request that sends temperature is
+# rejected outright. The runner omits it for these models and the baseline
+# records temperature as null -- the nondeterminism policy degrades from
+# "temperature 0" to "no sampling controls exposed; assume drift anyway".
+NO_SAMPLING_PARAMS = frozenset({"claude-opus-4-8"})
 PRIMARY_MODEL = "claude-sonnet-4-6"
 TEMPERATURE = 0.0
 MAX_TOKENS = 1024
@@ -98,12 +102,15 @@ def cost_usd(model: str, input_tokens: int, output_tokens: int) -> float:
 def _call_api(
     client: anthropic.Anthropic, model: str, system_prompt: str, input_text: str
 ) -> CachedResponse:
+    sampling: dict[str, float] = (
+        {} if model in NO_SAMPLING_PARAMS else {"temperature": TEMPERATURE}
+    )
     response = client.messages.create(
         model=model,
         max_tokens=MAX_TOKENS,
-        temperature=TEMPERATURE,
         system=system_prompt,
         messages=[{"role": "user", "content": input_text}],
+        **sampling,
     )
     text = "".join(block.text for block in response.content if block.type == "text")
     return CachedResponse(
@@ -204,7 +211,7 @@ def write_baseline(prompt_path: Path, prompt_text: str, model: str, result: RunR
         "prompt_version": prompt_path.stem,
         "prompt_sha256": prompt_sha256(prompt_text),
         "model": model,
-        "temperature": TEMPERATURE,
+        "temperature": None if model in NO_SAMPLING_PARAMS else TEMPERATURE,
         "max_tokens": MAX_TOKENS,
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "schema_validity_rate": result.schema_validity_rate,

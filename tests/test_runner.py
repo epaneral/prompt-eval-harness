@@ -95,6 +95,57 @@ def test_cost_usd_haiku_zero_tokens_is_zero() -> None:
     assert cost_usd("claude-haiku-4-5", 0, 0) == 0.0
 
 
+def test_cost_usd_opus_1k_in_1k_out() -> None:
+    # (1000 * 5.00 + 1000 * 25.00) / 1_000_000 == 0.030
+    assert cost_usd("claude-opus-4-8", 1000, 1000) == pytest.approx(0.030)
+
+
+# --- 3b. _call_api request shape per model -----------------------------------
+
+
+class _RecordingClient:
+    """Stands in for anthropic.Anthropic: captures messages.create kwargs."""
+
+    def __init__(self) -> None:
+        self.kwargs: dict[str, object] | None = None
+        self.messages = self
+
+    def create(self, **kwargs: object) -> object:
+        self.kwargs = kwargs
+
+        class _Block:
+            type = "text"
+            text = VALID_JSON
+
+        class _Usage:
+            input_tokens = 10
+            output_tokens = 5
+
+        class _Response:
+            content = [_Block()]
+            usage = _Usage()
+
+        return _Response()
+
+
+def test_call_api_sends_temperature_for_sonnet() -> None:
+    client = _RecordingClient()
+    runner._call_api(client, "claude-sonnet-4-6", "sys prompt", "input")
+    assert client.kwargs is not None
+    assert client.kwargs["temperature"] == 0.0
+    assert client.kwargs["model"] == "claude-sonnet-4-6"
+    assert client.kwargs["system"] == "sys prompt"
+
+
+def test_call_api_omits_temperature_for_opus() -> None:
+    # Opus 4.7+ rejects sampling params outright; the runner must not send them.
+    client = _RecordingClient()
+    runner._call_api(client, "claude-opus-4-8", "sys prompt", "input")
+    assert client.kwargs is not None
+    assert "temperature" not in client.kwargs
+    assert client.kwargs["model"] == "claude-opus-4-8"
+
+
 # --- 4. parse_output strictness --------------------------------------------
 
 
@@ -380,3 +431,23 @@ def test_write_baseline(
     assert "per_type" in report
     assert "exact_match_rate" in report
     assert "trap_fp_case_rate" in report
+
+
+def test_write_baseline_temperature_null_for_opus(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """An Opus baseline must not claim a temperature that was never sent."""
+    monkeypatch.setattr(runner, "CACHE_DIR", tmp_path / "cache")
+    monkeypatch.setattr(runner, "BASELINES_DIR", tmp_path / "baselines")
+    corpus = _build_corpus(tmp_path)
+    stub = _ScriptedCall(CachedResponse(VALID_JSON, input_tokens=100, output_tokens=40))
+    monkeypatch.setattr(runner, "_call_api", stub)
+
+    result = run_corpus(None, "claude-opus-4-8", "prompt v1", corpus)
+    prompt_path = tmp_path / "v1.md"
+    prompt_path.write_text("prompt v1", encoding="utf-8")
+    out = write_baseline(prompt_path, "prompt v1", "claude-opus-4-8", result)
+
+    payload = json.loads(out.read_text(encoding="utf-8"))
+    assert payload["temperature"] is None
+    assert payload["model"] == "claude-opus-4-8"
