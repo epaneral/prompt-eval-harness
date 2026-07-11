@@ -1,0 +1,10 @@
+{
+  "model": "claude-haiku-4-5",
+  "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
+  "case_id": "benign_context_domains_05_trap",
+  "response_text": "```json\n{\"ipv4\": [\"185[.]220[.]101[.]47\"], \"domains\": [\"staging-panel-cdn[.]xyz\"], \"urls\": [\"hxxps://panel[.]example[.]com/gate\"], \"hashes\": [\"b364f82bb05aa8b7db2e40346c806e3b\"]}\n```",
+  "usage": {
+    "input_tokens": 596,
+    "output_tokens": 83
+  }
+}

@@ -1,0 +1,2198 @@
+{
+  "prompt_version": "v1",
+  "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
+  "model": "claude-haiku-4-5",
+  "temperature": 0.0,
+  "max_tokens": 1024,
+  "created_at": "2026-07-11T03:04:01+00:00",
+  "schema_validity_rate": 0.0,
+  "schema_invalid_cases": [
+    "benign_context_domains_01_pos",
+    "benign_context_domains_01_trap",
+    "benign_context_domains_02_pos",
+    "benign_context_domains_02_trap",
+    "benign_context_domains_03_pos",
+    "benign_context_domains_03_trap",
+    "benign_context_domains_04_pos",
+    "benign_context_domains_04_trap",
+    "benign_context_domains_05_pos",
+    "benign_context_domains_05_trap",
+    "defanged_01_pos",
+    "defanged_01_trap",
+    "defanged_02_pos",
+    "defanged_02_trap",
+    "defanged_03_pos",
+    "defanged_03_trap",
+    "defanged_04_pos",
+    "defanged_04_trap",
+    "defanged_05_pos",
+    "defanged_05_trap",
+    "hash_lookalikes_01_pos",
+    "hash_lookalikes_01_trap",
+    "hash_lookalikes_02_pos",
+    "hash_lookalikes_02_trap",
+    "hash_lookalikes_03_pos",
+    "hash_lookalikes_03_trap",
+    "hash_lookalikes_04_pos",
+    "hash_lookalikes_04_trap",
+    "reserved_ranges_01_pos",
+    "reserved_ranges_01_trap",
+    "reserved_ranges_02_pos",
+    "reserved_ranges_02_trap",
+    "reserved_ranges_03_pos",
+    "reserved_ranges_03_trap",
+    "reserved_ranges_04_pos",
+    "reserved_ranges_04_trap",
+    "version_strings_01_pos",
+    "version_strings_01_trap",
+    "version_strings_02_pos",
+    "version_strings_02_trap",
+    "version_strings_03_pos",
+    "version_strings_03_trap",
+    "version_strings_04_pos",
+    "version_strings_04_trap"
+  ],
+  "total_cost_usd": 0.04156,
+  "api_calls": 44,
+  "cache_hits": 0,
+  "report": {
+    "per_type": {
+      "ipv4": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      },
+      "domains": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      },
+      "urls": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      },
+      "hashes": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      }
+    },
+    "exact_match_rate": 0.0,
+    "by_category": {
+      "benign_context_domains": {
+        "ipv4": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 8
+        },
+        "domains": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 10
+        },
+        "urls": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 4
+        },
+        "hashes": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 10
+        }
+      },
+      "defanged": {
+        "ipv4": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 7
+        },
+        "domains": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 13
+        },
+        "urls": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 6
+        },
+        "hashes": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2
+        }
+      },
+      "hash_lookalikes": {
+        "ipv4": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 8
+        },
+        "domains": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 8
+        },
+        "urls": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 4
+        },
+        "hashes": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 8
+        }
+      },
+      "reserved_ranges": {
+        "ipv4": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 8
+        },
+        "domains": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 6
+        },
+        "urls": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2
+        },
+        "hashes": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2
+        }
+      },
+      "version_strings": {
+        "ipv4": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 8
+        },
+        "domains": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 4
+        },
+        "urls": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2
+        },
+        "hashes": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 2
+        }
+      }
+    },
+    "trap_fp_case_rate": 0.0,
+    "trap_fp_cases": [],
+    "cases": [
+      {
+        "case_id": "defanged_01_pos",
+        "category": "defanged",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "45[.]132[.]19[.]77"
+          ],
+          "domains": [
+            "malwaredrop45[.]net"
+          ],
+          "urls": [
+            "hxxp://malwaredrop45[.]net/panel/login.php"
+          ],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_01_trap",
+        "category": "defanged",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "45[.]132[.]19[.]77"
+          ],
+          "domains": [
+            "malwaredrop45[.]net"
+          ],
+          "urls": [
+            "hxxp://malwaredrop45[.]net/panel/login.php"
+          ],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_02_pos",
+        "category": "defanged",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]204[.]55[.]18"
+          ],
+          "domains": [
+            "phish-portal77[.]com",
+            "update-relay[.]org"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_02_trap",
+        "category": "defanged",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]204[.]55[.]18"
+          ],
+          "domains": [
+            "phish-portal77[.]com",
+            "update-relay[.]org"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_03_pos",
+        "category": "defanged",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]111[.]9"
+          ],
+          "domains": [
+            "cdn-sync[.]info",
+            "stage-loader[.]xyz"
+          ],
+          "urls": [
+            "hxxp://stage-loader[.]xyz/dl/a.bin"
+          ],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_03_trap",
+        "category": "defanged",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [],
+          "domains": [
+            "stage-loader[.]xyz"
+          ],
+          "urls": [
+            "hxxp://stage-loader[.]xyz/dl/a.bin"
+          ],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_04_pos",
+        "category": "defanged",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [],
+          "domains": [
+            "beacon-hub[.]live"
+          ],
+          "urls": [
+            "hxxps://beacon-hub[.]live/api/v2/checkin"
+          ],
+          "hashes": [
+            "044bdf0f77b9a1df8dfdb52415ee6ad5bbc387a8e6f9ea02a7df29e22f337abb"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_04_trap",
+        "category": "defanged",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [],
+          "domains": [
+            "beacon-hub[.]live"
+          ],
+          "urls": [
+            "hxxps://beacon-hub[.]live/api/v2/checkin"
+          ],
+          "hashes": [
+            "044bdf0f77b9a1df8dfdb52415ee6ad5bbc387a8e6f9ea02a7df29e22f337abb"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_05_pos",
+        "category": "defanged",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "193[.]29[.]104[.]66"
+          ],
+          "domains": [
+            "delivery-cache[.]net"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "defanged_05_trap",
+        "category": "defanged",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "193[.]29[.]104[.]66"
+          ],
+          "domains": [
+            "delivery-cache[.]net"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "version_strings_01_pos",
+        "category": "version_strings",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "45[.]129[.]14[.]203"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "version_strings_01_trap",
+        "category": "version_strings",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "45[.]129[.]14[.]203"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "version_strings_02_pos",
+        "category": "version_strings",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]242[.]219[.]7"
+          ],
+          "domains": [
+            "cdn-sync-panel[.]net"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "version_strings_02_trap",
+        "category": "version_strings",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]242[.]219[.]7"
+          ],
+          "domains": [
+            "cdn-sync-panel[.]net"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "version_strings_03_pos",
+        "category": "version_strings",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]38[.]112"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": [
+            "d4eecfd93dc61dd365ef4c5b2e1bad2b959fa823efc2c3aa197f60b586974be0"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "version_strings_03_trap",
+        "category": "version_strings",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]38[.]112"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": [
+            "d4eecfd93dc61dd365ef4c5b2e1bad2b959fa823efc2c3aa197f60b586974be0"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "version_strings_04_pos",
+        "category": "version_strings",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "185[.]220[.]101[.]44"
+          ],
+          "domains": [
+            "mail-verify-secure[.]com"
+          ],
+          "urls": [
+            "hxxps://mail-verify-secure[.]com/update/portal.php"
+          ],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "version_strings_04_trap",
+        "category": "version_strings",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "185[.]220[.]101[.]44"
+          ],
+          "domains": [
+            "mail-verify-secure[.]com"
+          ],
+          "urls": [
+            "hxxps://mail-verify-secure[.]com/update/portal.php"
+          ],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "hash_lookalikes_01_pos",
+        "category": "hash_lookalikes",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "185[.]216[.]71[.]44"
+          ],
+          "domains": [
+            "cdn-silverquill[.]net"
+          ],
+          "urls": [
+            "hxxps://cdn-silverquill[.]net/loader.bin"
+          ],
+          "hashes": [
+            "053d2bcc2f45bd87e5570b3b0ce4bcbdd0b62ea6"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "hash_lookalikes_01_trap",
+        "category": "hash_lookalikes",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "185[.]216[.]71[.]44"
+          ],
+          "domains": [
+            "cdn-silverquill[.]net"
+          ],
+          "urls": [
+            "hxxps://cdn-silverquill[.]net/loader.bin"
+          ],
+          "hashes": [
+            "053d2bcc2f45bd87e5570b3b0ce4bcbdd0b62ea6"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "hash_lookalikes_02_pos",
+        "category": "hash_lookalikes",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "45[.]142[.]212[.]19"
+          ],
+          "domains": [
+            "grip-analytics[.]org"
+          ],
+          "urls": [],
+          "hashes": [
+            "a0c7d4f3140e9f13469e7c5ad25d3fe2"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "hash_lookalikes_02_trap",
+        "category": "hash_lookalikes",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "45[.]142[.]212[.]19"
+          ],
+          "domains": [
+            "grip-analytics[.]org"
+          ],
+          "urls": [],
+          "hashes": [
+            "a0c7d4f3140e9f13469e7c5ad25d3fe2"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "hash_lookalikes_03_pos",
+        "category": "hash_lookalikes",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]240[.]118[.]62"
+          ],
+          "domains": [
+            "pool[.]hollowreef[.]xyz"
+          ],
+          "urls": [
+            "hxxp://pool[.]hollowreef[.]xyz/cfg"
+          ],
+          "hashes": [
+            "62bf169257096993606554fabf9cf3a5f23a1f4772e09c7609d4e60ed85aaf0f"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "hash_lookalikes_03_trap",
+        "category": "hash_lookalikes",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]240[.]118[.]62"
+          ],
+          "domains": [
+            "pool[.]hollowreef[.]xyz"
+          ],
+          "urls": [
+            "hxxp://pool[.]hollowreef[.]xyz/cfg"
+          ],
+          "hashes": [
+            "62bf169257096993606554fabf9cf3a5f23a1f4772e09c7609d4e60ed85aaf0f"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "hash_lookalikes_04_pos",
+        "category": "hash_lookalikes",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]199[.]85"
+          ],
+          "domains": [
+            "login-paletrace[.]com"
+          ],
+          "urls": [],
+          "hashes": [
+            "af898bd9bae1ef2fe746d17ae1268588696435877b44ac3baffb5c3820db1b9a"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "hash_lookalikes_04_trap",
+        "category": "hash_lookalikes",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]199[.]85"
+          ],
+          "domains": [
+            "login-paletrace[.]com"
+          ],
+          "urls": [],
+          "hashes": [
+            "af898bd9bae1ef2fe746d17ae1268588696435877b44ac3baffb5c3820db1b9a"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_01_pos",
+        "category": "benign_context_domains",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "45[.]153[.]240[.]17"
+          ],
+          "domains": [
+            "pypi-secure-mirror[.]net"
+          ],
+          "urls": [],
+          "hashes": [
+            "9a12cdd17cd9e8392164c7ea45466baf"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_01_trap",
+        "category": "benign_context_domains",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "45[.]153[.]240[.]17"
+          ],
+          "domains": [
+            "pypi-secure-mirror[.]net"
+          ],
+          "urls": [],
+          "hashes": [
+            "9a12cdd17cd9e8392164c7ea45466baf"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_02_pos",
+        "category": "benign_context_domains",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [],
+          "domains": [
+            "cdn-github-raw[.]io"
+          ],
+          "urls": [
+            "hxxps://cdn-github-raw[.]io/assets/loader.bin"
+          ],
+          "hashes": [
+            "3f2585b2383889d9f6f443eb2d4831a0ed26a95b"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_02_trap",
+        "category": "benign_context_domains",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [],
+          "domains": [
+            "cdn-github-raw[.]io"
+          ],
+          "urls": [
+            "hxxps://cdn-github-raw[.]io/assets/loader.bin"
+          ],
+          "hashes": [
+            "3f2585b2383889d9f6f443eb2d4831a0ed26a95b"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_03_pos",
+        "category": "benign_context_domains",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]201[.]66[.]18"
+          ],
+          "domains": [
+            "npm-telemetry-collector[.]org"
+          ],
+          "urls": [],
+          "hashes": [
+            "875aab3fb9824bca9a3d5744ca9b3a55c11f86adaaa7406a987e3f0f667943a5"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_03_trap",
+        "category": "benign_context_domains",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]201[.]66[.]18"
+          ],
+          "domains": [
+            "npm-telemetry-collector[.]org"
+          ],
+          "urls": [],
+          "hashes": [
+            "875aab3fb9824bca9a3d5744ca9b3a55c11f86adaaa7406a987e3f0f667943a5"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_04_pos",
+        "category": "benign_context_domains",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]115[.]9"
+          ],
+          "domains": [
+            "mssecure-update-svc[.]com"
+          ],
+          "urls": [
+            "hxxps://mssecure-update-svc[.]com/v2/check"
+          ],
+          "hashes": [
+            "60b42f0824734601574acdb43b2b2c0a3b62f43d"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_04_trap",
+        "category": "benign_context_domains",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]115[.]9"
+          ],
+          "domains": [
+            "mssecure-update-svc[.]com"
+          ],
+          "urls": [
+            "hxxps://mssecure-update-svc[.]com/v2/check"
+          ],
+          "hashes": [
+            "60b42f0824734601574acdb43b2b2c0a3b62f43d"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_05_pos",
+        "category": "benign_context_domains",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "185[.]220[.]101[.]47"
+          ],
+          "domains": [
+            "staging-panel-cdn[.]xyz"
+          ],
+          "urls": [],
+          "hashes": [
+            "b364f82bb05aa8b7db2e40346c806e3b"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "benign_context_domains_05_trap",
+        "category": "benign_context_domains",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "185[.]220[.]101[.]47"
+          ],
+          "domains": [
+            "staging-panel-cdn[.]xyz"
+          ],
+          "urls": [],
+          "hashes": [
+            "b364f82bb05aa8b7db2e40346c806e3b"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "reserved_ranges_01_pos",
+        "category": "reserved_ranges",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "193[.]142[.]146[.]204",
+            "45[.]146[.]165[.]37"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "reserved_ranges_01_trap",
+        "category": "reserved_ranges",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 2
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "193[.]142[.]146[.]204",
+            "45[.]146[.]165[.]37"
+          ],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "reserved_ranges_02_pos",
+        "category": "reserved_ranges",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]132[.]58[.]19"
+          ],
+          "domains": [
+            "vault-sync-cdn[.]net"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "reserved_ranges_02_trap",
+        "category": "reserved_ranges",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "91[.]132[.]58[.]19"
+          ],
+          "domains": [
+            "vault-sync-cdn[.]net"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "reserved_ranges_03_pos",
+        "category": "reserved_ranges",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [],
+          "domains": [
+            "cdn-refresh-static[.]com"
+          ],
+          "urls": [
+            "hxxps://cdn-refresh-static[.]com/pack/loader.bin"
+          ],
+          "hashes": [
+            "80daa4867214a8814a88e76a862262a16e074c4cd82c3da1e44d8af49d3bf93a"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "reserved_ranges_03_trap",
+        "category": "reserved_ranges",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [],
+          "domains": [
+            "cdn-refresh-static[.]com"
+          ],
+          "urls": [
+            "hxxps://cdn-refresh-static[.]com/pack/loader.bin"
+          ],
+          "hashes": [
+            "80daa4867214a8814a88e76a862262a16e074c4cd82c3da1e44d8af49d3bf93a"
+          ]
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "reserved_ranges_04_pos",
+        "category": "reserved_ranges",
+        "role": "positive",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]199[.]88"
+          ],
+          "domains": [
+            "update-mirror-svc[.]org"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      },
+      {
+        "case_id": "reserved_ranges_04_trap",
+        "category": "reserved_ranges",
+        "role": "trap",
+        "counts": {
+          "ipv4": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "domains": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "urls": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "hashes": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "false_extractions": {
+          "ipv4": [],
+          "domains": [],
+          "urls": [],
+          "hashes": []
+        },
+        "missed": {
+          "ipv4": [
+            "146[.]70[.]199[.]88"
+          ],
+          "domains": [
+            "update-mirror-svc[.]org"
+          ],
+          "urls": [],
+          "hashes": []
+        },
+        "exact_match": false
+      }
+    ]
+  }
+}
