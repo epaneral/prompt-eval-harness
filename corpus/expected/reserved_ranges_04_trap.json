@@ -2,7 +2,9 @@
   "ipv4": [
     "146[.]70[.]199[.]88"
   ],
-  "domains": [],
+  "domains": [
+    "update-mirror-svc[.]org"
+  ],
   "urls": [],
   "hashes": []
 }
