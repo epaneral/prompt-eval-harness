@@ -1,0 +1,10 @@
+{
+  "model": "claude-opus-4-8",
+  "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
+  "case_id": "reserved_ranges_04_trap",
+  "response_text": "{\"ipv4\": [\"146[.]70[.]199[.]88\"], \"domains\": [\"update-mirror-svc[.]org\"], \"urls\": [], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 795,
+    "output_tokens": 59
+  }
+}

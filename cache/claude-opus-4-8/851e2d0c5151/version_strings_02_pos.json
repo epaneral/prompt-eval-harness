@@ -1,0 +1,10 @@
+{
+  "model": "claude-opus-4-8",
+  "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
+  "case_id": "version_strings_02_pos",
+  "response_text": "{\"ipv4\": [\"91[.]242[.]219[.]7\"], \"domains\": [\"cdn-sync-panel[.]net\"], \"urls\": [], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 730,
+    "output_tokens": 60
+  }
+}

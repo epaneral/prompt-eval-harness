@@ -1,0 +1,10 @@
+{
+  "model": "claude-opus-4-8",
+  "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
+  "case_id": "hash_lookalikes_03_trap",
+  "response_text": "{\"ipv4\": [\"91[.]240[.]118[.]62\"], \"domains\": [\"pool[.]hollowreef[.]xyz\"], \"urls\": [\"hxxp://pool[.]hollowreef[.]xyz/cfg\"], \"hashes\": [\"62bf169257096993606554fabf9cf3a5f23a1f4772e09c7609d4e60ed85aaf0f\"]}",
+  "usage": {
+    "input_tokens": 854,
+    "output_tokens": 135
+  }
+}
