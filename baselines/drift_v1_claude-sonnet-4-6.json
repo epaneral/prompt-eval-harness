@@ -1,0 +1,62 @@
+{
+  "purpose": "Drift measurement for Checkpoint 2 gate setting: independent full-corpus runs with fresh (uncached) samples, compared to the pinned v1/sonnet baseline in which every metric is at ceiling. A flip is any case that fails exact match on a fresh sample.",
+  "methodology": "harness.runner.run_corpus with CACHE_DIR pointed at a scratch directory per run (forces 44 fresh API calls each run); prompt prompts/v1.md; temperature 0; max_tokens 1024; fence policy strict for this model.",
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
+  "n_runs": 5,
+  "total_case_samples": 220,
+  "total_flips": 0,
+  "total_cost_usd": 0.60366,
+  "runs": [
+    {
+      "run": 1,
+      "schema_validity_rate": 1.0,
+      "fenced_responses": 0,
+      "exact_match_rate": 1.0,
+      "non_exact_cases": [],
+      "detail": {},
+      "trap_fp_case_rate_valid": 0.0,
+      "cost_usd": 0.120732
+    },
+    {
+      "run": 2,
+      "schema_validity_rate": 1.0,
+      "fenced_responses": 0,
+      "exact_match_rate": 1.0,
+      "non_exact_cases": [],
+      "detail": {},
+      "trap_fp_case_rate_valid": 0.0,
+      "cost_usd": 0.120732
+    },
+    {
+      "run": 3,
+      "schema_validity_rate": 1.0,
+      "fenced_responses": 0,
+      "exact_match_rate": 1.0,
+      "non_exact_cases": [],
+      "detail": {},
+      "trap_fp_case_rate_valid": 0.0,
+      "cost_usd": 0.120732
+    },
+    {
+      "run": 4,
+      "schema_validity_rate": 1.0,
+      "fenced_responses": 0,
+      "exact_match_rate": 1.0,
+      "non_exact_cases": [],
+      "detail": {},
+      "trap_fp_case_rate_valid": 0.0,
+      "cost_usd": 0.120732
+    },
+    {
+      "run": 5,
+      "schema_validity_rate": 1.0,
+      "fenced_responses": 0,
+      "exact_match_rate": 1.0,
+      "non_exact_cases": [],
+      "detail": {},
+      "trap_fp_case_rate_valid": 0.0,
+      "cost_usd": 0.120732
+    }
+  ]
+}
