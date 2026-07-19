@@ -277,3 +277,23 @@ def test_input_files_non_empty(corpus_root: Path, manifest: list[CaseSpec]) -> N
         if not text.strip():
             empty.append(f"{spec.id}: {spec.input}")
     assert not empty, f"input files that are empty or whitespace-only: {sorted(empty)}"
+
+
+# --- 11. every expected file has at least one indicator ----------------------
+
+
+def test_expected_files_have_at_least_one_indicator(
+    corpus_root: Path, manifest: list[CaseSpec]
+) -> None:
+    """Grading-policy invariant, not just corpus hygiene: a schema-invalid
+    response grades as an EMPTY extraction, so a case whose expected
+    output were entirely empty would score an unparseable response as an
+    exact match. The corpus was drafted so every case expects at least
+    one indicator; this test converts that from accident to invariant.
+    """
+    empty: list[str] = []
+    for spec in manifest:
+        expected = _load_expected(corpus_root, spec)
+        if not (expected.ipv4 or expected.domains or expected.urls or expected.hashes):
+            empty.append(spec.id)
+    assert not empty, f"cases whose expected output is entirely empty: {empty}"
