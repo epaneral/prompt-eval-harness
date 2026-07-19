@@ -57,7 +57,8 @@ the phase plan and working agreement are in
 - `prompts/v2_regression_demo.md`: a plausible bad edit — the judgment rules
   deleted and a recall-maximizing instruction added ("when in doubt, include
   it"). Applied to the gated prompt on the `regression-demo` branch
-  (do not merge); the pull request exists to stay red.
+  (do not merge); [PR #1](https://github.com/epaneral/prompt-eval-harness/pull/1)
+  exists to stay red.
 - Measured damage (single run, claude-sonnet-4-6, $0.10): schema validity
   still 100% — the regression is pure judgment — while **12 of 22 traps leak
   (54.5%)**: all benign_context_domains, all reserved_ranges, 3 of 4
