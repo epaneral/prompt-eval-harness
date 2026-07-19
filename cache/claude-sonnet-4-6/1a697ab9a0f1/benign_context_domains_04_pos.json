@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "benign_context_domains_04_pos",
+  "input_sha256": "a1805b4fa1cb6a6511abb3dc2a4ce3101643cfbbdaa00f4ce50856cef6a157ec",
+  "response_text": "{\"ipv4\": [\"146[.]70[.]115[.]9\"], \"domains\": [\"mssecure-update-svc[.]com\"], \"urls\": [\"hxxps://mssecure-update-svc[.]com/v2/check\"], \"hashes\": [\"60b42f0824734601574acdb43b2b2c0a3b62f43d\"]}",
+  "usage": {
+    "input_tokens": 409,
+    "output_tokens": 95
+  }
+}

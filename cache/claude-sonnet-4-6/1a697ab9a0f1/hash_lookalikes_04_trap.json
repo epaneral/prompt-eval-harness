@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "hash_lookalikes_04_trap",
+  "input_sha256": "628e6fd0b5578c79eda0e2fe444edb83d4877050d0425ac97a02402c4324ecfe",
+  "response_text": "{\"ipv4\": [\"146[.]70[.]199[.]85\"], \"domains\": [\"login-paletrace[.]com\"], \"urls\": [], \"hashes\": [\"af898bd9bae1ef2fe746d17ae1268588696435877b44ac3baffb5c3820db1b9a\", \"d78654ebf61a3e460342be810e14eb50e07634cb\"]}",
+  "usage": {
+    "input_tokens": 447,
+    "output_tokens": 103
+  }
+}

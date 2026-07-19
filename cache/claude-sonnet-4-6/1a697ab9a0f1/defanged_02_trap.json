@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "defanged_02_trap",
+  "input_sha256": "a82a1542a297d8a1436100d3bbfba21fef7287c76e2de59a585563a5ab6ce5fe",
+  "response_text": "{\"ipv4\": [\"91[.]204[.]55[.]18\"], \"domains\": [\"phish-portal77[.]com\", \"update-relay[.]org\"], \"urls\": [], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 404,
+    "output_tokens": 51
+  }
+}

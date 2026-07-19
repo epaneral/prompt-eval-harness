@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "benign_context_domains_02_pos",
+  "input_sha256": "2f9d7103e3b1118939e00a1f87afbbedde79e6b9337e36c9b353fb8fc0ba7827",
+  "response_text": "{\"ipv4\": [], \"domains\": [\"cdn-github-raw[.]io\"], \"urls\": [\"hxxps://cdn-github-raw[.]io/assets/loader.bin\"], \"hashes\": [\"3f2585b2383889d9f6f443eb2d4831a0ed26a95b\"]}",
+  "usage": {
+    "input_tokens": 399,
+    "output_tokens": 78
+  }
+}

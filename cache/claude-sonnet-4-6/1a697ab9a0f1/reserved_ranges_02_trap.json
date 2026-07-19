@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "reserved_ranges_02_trap",
+  "input_sha256": "3e71ac2cfbb421a2a092b312af9b9ce444a6d2c85dcdaaf68be81a51b411adec",
+  "response_text": "{\"ipv4\": [\"91[.]132[.]58[.]19\", \"10[.]44[.]12[.]9\"], \"domains\": [\"vault-sync-cdn[.]net\"], \"urls\": [], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 407,
+    "output_tokens": 55
+  }
+}

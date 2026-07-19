@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "version_strings_04_pos",
+  "input_sha256": "c79d92aaab76335a8e0de72ba87e4616e0095cbed6beb326966eaa973be311ff",
+  "response_text": "{\"ipv4\": [\"185[.]220[.]101[.]44\"], \"domains\": [\"mail-verify-secure[.]com\"], \"urls\": [\"hxxps://mail-verify-secure[.]com/update/portal.php\"], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 387,
+    "output_tokens": 62
+  }
+}

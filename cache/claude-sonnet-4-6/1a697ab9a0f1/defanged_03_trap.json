@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "defanged_03_trap",
+  "input_sha256": "56ba0ae7490cced34f340cc16bbdd62d10034afdb93524dfd503a094a784669d",
+  "response_text": "{\"ipv4\": [], \"domains\": [\"stage-loader[.]xyz\"], \"urls\": [\"hxxp://stage-loader[.]xyz/dl/a.bin\"], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 382,
+    "output_tokens": 47
+  }
+}

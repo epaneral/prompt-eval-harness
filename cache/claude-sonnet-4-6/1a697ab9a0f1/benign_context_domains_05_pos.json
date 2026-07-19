@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "benign_context_domains_05_pos",
+  "input_sha256": "c9e17394d36aa0db477bdd19663cb58630684571f2fe301b5b14b3e2bffb014c",
+  "response_text": "{\"ipv4\": [\"185[.]220[.]101[.]47\"], \"domains\": [\"staging-panel-cdn[.]xyz\"], \"urls\": [], \"hashes\": [\"b364f82bb05aa8b7db2e40346c806e3b\"]}",
+  "usage": {
+    "input_tokens": 387,
+    "output_tokens": 64
+  }
+}

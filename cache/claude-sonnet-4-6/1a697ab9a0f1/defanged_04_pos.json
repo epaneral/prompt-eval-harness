@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "defanged_04_pos",
+  "input_sha256": "48589660b78f97a6f5c03ede554fc1259e9c40a07c2d180f4ba2edeb589d930f",
+  "response_text": "{\"ipv4\": [], \"domains\": [\"beacon-hub[.]live\"], \"urls\": [\"hxxps://beacon-hub[.]live/api/v2/checkin\"], \"hashes\": [\"044bdf0f77b9a1df8dfdb52415ee6ad5bbc387a8e6f9ea02a7df29e22f337abb\"]}",
+  "usage": {
+    "input_tokens": 408,
+    "output_tokens": 91
+  }
+}

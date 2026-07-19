@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "hash_lookalikes_03_pos",
+  "input_sha256": "4d45f2b55113f0f360d0dd0e3eda6e0313d4b6dded2072e710125b7db68809dc",
+  "response_text": "{\"ipv4\": [\"91[.]240[.]118[.]62\"], \"domains\": [\"pool[.]hollowreef[.]xyz\"], \"urls\": [\"hxxp://pool.hollowreef[.]xyz/cfg\"], \"hashes\": [\"62bf169257096993606554fabf9cf3a5f23a1f4772e09c7609d4e60ed85aaf0f\"]}",
+  "usage": {
+    "input_tokens": 427,
+    "output_tokens": 99
+  }
+}

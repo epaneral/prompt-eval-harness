@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "defanged_01_trap",
+  "input_sha256": "d0f2cbe49438d7f8fa34d4690c50df3762406402f943afe9772f85085e73fb32",
+  "response_text": "{\"ipv4\": [\"45[.]132[.]19[.]77\"], \"domains\": [\"malwaredrop45[.]net\"], \"urls\": [\"hxxp://malwaredrop45[.]net/panel/login.php\"], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 403,
+    "output_tokens": 62
+  }
+}

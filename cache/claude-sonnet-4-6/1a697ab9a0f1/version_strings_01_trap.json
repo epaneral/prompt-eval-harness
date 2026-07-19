@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "version_strings_01_trap",
+  "input_sha256": "8ca5c92cfce1b0d14c8c1d5a93560b59545056e8c101a2a64aa5e332779f4c43",
+  "response_text": "{\"ipv4\": [\"45[.]129[.]14[.]203\"], \"domains\": [], \"urls\": [], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 392,
+    "output_tokens": 34
+  }
+}
