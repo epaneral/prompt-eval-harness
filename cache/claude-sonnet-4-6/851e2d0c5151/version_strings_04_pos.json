@@ -2,6 +2,7 @@
   "model": "claude-sonnet-4-6",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "version_strings_04_pos",
+  "input_sha256": "c79d92aaab76335a8e0de72ba87e4616e0095cbed6beb326966eaa973be311ff",
   "response_text": "{\"ipv4\": [\"185[.]220[.]101[.]44\"], \"domains\": [\"mail-verify-secure[.]com\"], \"urls\": [\"hxxps://mail-verify-secure[.]com/update/portal.php\"], \"hashes\": []}",
   "usage": {
     "input_tokens": 561,

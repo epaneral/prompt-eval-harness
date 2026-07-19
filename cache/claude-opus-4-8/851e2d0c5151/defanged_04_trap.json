@@ -2,6 +2,7 @@
   "model": "claude-opus-4-8",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "defanged_04_trap",
+  "input_sha256": "2c47e8e2dd01c9a485d0ac0f04dda121a17e0e4e4698404b895cfda9a5808f3c",
   "response_text": "{\"ipv4\": [], \"domains\": [\"beacon-hub[.]live\"], \"urls\": [\"hxxps://beacon-hub[.]live/api/v2/checkin\"], \"hashes\": [\"044bdf0f77b9a1df8dfdb52415ee6ad5bbc387a8e6f9ea02a7df29e22f337abb\"]}",
   "usage": {
     "input_tokens": 811,

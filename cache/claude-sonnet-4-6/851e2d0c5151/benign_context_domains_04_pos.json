@@ -2,6 +2,7 @@
   "model": "claude-sonnet-4-6",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "benign_context_domains_04_pos",
+  "input_sha256": "a1805b4fa1cb6a6511abb3dc2a4ce3101643cfbbdaa00f4ce50856cef6a157ec",
   "response_text": "{\"ipv4\": [\"146[.]70[.]115[.]9\"], \"domains\": [\"mssecure-update-svc[.]com\"], \"urls\": [\"hxxps://mssecure-update-svc[.]com/v2/check\"], \"hashes\": [\"60b42f0824734601574acdb43b2b2c0a3b62f43d\"]}",
   "usage": {
     "input_tokens": 583,

@@ -2,6 +2,7 @@
   "model": "claude-sonnet-4-6",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "defanged_02_pos",
+  "input_sha256": "6dc56bc95dae1a3b202b3053795466f65116f3091b6a7fa0a2090b1d8e5a378d",
   "response_text": "{\"ipv4\": [\"91[.]204[.]55[.]18\"], \"domains\": [\"phish-portal77[.]com\", \"update-relay[.]org\"], \"urls\": [], \"hashes\": []}",
   "usage": {
     "input_tokens": 557,

@@ -2,6 +2,7 @@
   "model": "claude-sonnet-4-6",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "version_strings_01_trap",
+  "input_sha256": "8ca5c92cfce1b0d14c8c1d5a93560b59545056e8c101a2a64aa5e332779f4c43",
   "response_text": "{\"ipv4\": [\"45[.]129[.]14[.]203\"], \"domains\": [], \"urls\": [], \"hashes\": []}",
   "usage": {
     "input_tokens": 566,

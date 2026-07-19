@@ -2,6 +2,7 @@
   "model": "claude-haiku-4-5",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "version_strings_03_pos",
+  "input_sha256": "3ad3de9b90190694ea68c9b55cdc74ce9c60155ecc8fd22c105edcb168dd937f",
   "response_text": "```json\n{\"ipv4\": [\"146[.]70[.]38[.]112\"], \"domains\": [], \"urls\": [], \"hashes\": [\"d4eecfd93dc61dd365ef4c5b2e1bad2b959fa823efc2c3aa197f60b586974be0\"]}\n```",
   "usage": {
     "input_tokens": 577,

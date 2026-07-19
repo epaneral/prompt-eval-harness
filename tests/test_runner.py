@@ -22,6 +22,7 @@ with a counting stub everywhere a call would otherwise happen.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -267,7 +268,14 @@ def test_fetch_response_cache_round_trip(
     path = cache_path("claude-sonnet-4-6", prompt_sha256("prompt"), "case_a")
     assert path.exists()
     written = json.loads(path.read_text(encoding="utf-8"))
-    assert set(written) == {"model", "prompt_sha256", "case_id", "response_text", "usage"}
+    assert set(written) == {
+        "model",
+        "prompt_sha256",
+        "case_id",
+        "input_sha256",
+        "response_text",
+        "usage",
+    }
     assert written["model"] == "claude-sonnet-4-6"
     assert written["prompt_sha256"] == prompt_sha256("prompt")
     assert written["case_id"] == "case_a"
@@ -568,3 +576,41 @@ def test_write_baseline_temperature_null_for_opus(
     payload = json.loads(out.read_text(encoding="utf-8"))
     assert payload["temperature"] is None
     assert payload["model"] == "claude-opus-4-8"
+
+
+# --- 8. cache staleness: edited input for the same case_id is a miss --------
+
+
+def test_fetch_response_stale_input_forces_miss_and_rewrite(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """The cache key is (prompt, model, case_id), but a served entry must also
+    match the case's current input hash. Re-fetching the SAME case_id with
+    DIFFERENT input_text is therefore a miss: the stub runs again and the
+    cache file is rewritten with the new input_sha256 (never silently reusing
+    the response to the old wording)."""
+    monkeypatch.setattr(runner, "CACHE_DIR", tmp_path)
+    stub = _CallCounter(CachedResponse(VALID_JSON, input_tokens=120, output_tokens=34))
+    monkeypatch.setattr(runner, "_call_api", stub)
+
+    old_input = "original input text"
+    new_input = "EDITED input text"
+    path = cache_path("claude-sonnet-4-6", prompt_sha256("prompt"), "case_a")
+
+    # First fetch: a miss populating the cache for the original input.
+    _, from_cache = fetch_response(None, "claude-sonnet-4-6", "prompt", "case_a", old_input)
+    assert from_cache is False
+    assert stub.calls == 1
+    first = json.loads(path.read_text(encoding="utf-8"))
+    assert first["input_sha256"] == hashlib.sha256(old_input.encode("utf-8")).hexdigest()
+
+    # Second fetch, same case_id but edited input: the recorded input hash no
+    # longer matches, so this is a MISS -- the stub is invoked again.
+    _, from_cache = fetch_response(None, "claude-sonnet-4-6", "prompt", "case_a", new_input)
+    assert from_cache is False
+    assert stub.calls == 2
+
+    # The rewritten cache file records the NEW input's sha256.
+    rewritten = json.loads(path.read_text(encoding="utf-8"))
+    assert rewritten["input_sha256"] == hashlib.sha256(new_input.encode("utf-8")).hexdigest()
+    assert rewritten["input_sha256"] != first["input_sha256"]

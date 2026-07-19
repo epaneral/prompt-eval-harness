@@ -2,6 +2,7 @@
   "model": "claude-sonnet-4-6",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "defanged_05_pos",
+  "input_sha256": "466c029e84063b96b83accf339533735a89fd73098a881615f2d979c180e756a",
   "response_text": "{\"ipv4\": [\"193[.]29[.]104[.]66\"], \"domains\": [\"delivery-cache[.]net\"], \"urls\": [], \"hashes\": []}",
   "usage": {
     "input_tokens": 548,

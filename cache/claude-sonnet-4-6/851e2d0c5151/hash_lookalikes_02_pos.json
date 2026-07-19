@@ -2,6 +2,7 @@
   "model": "claude-sonnet-4-6",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "hash_lookalikes_02_pos",
+  "input_sha256": "8ddae8341baf2599615aa559d526bbb9cffdd76aa6dad7cc98a175ac55ebfe60",
   "response_text": "{\"ipv4\": [\"45[.]142[.]212[.]19\"], \"domains\": [\"grip-analytics[.]org\"], \"urls\": [], \"hashes\": [\"a0c7d4f3140e9f13469e7c5ad25d3fe2\"]}",
   "usage": {
     "input_tokens": 572,

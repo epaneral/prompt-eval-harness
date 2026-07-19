@@ -2,6 +2,7 @@
   "model": "claude-haiku-4-5",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "hash_lookalikes_04_pos",
+  "input_sha256": "aaf1ce30ae0236b9a6fd1b6706500ff04133ef553ea5b7e4ddcb3c49a05c48bb",
   "response_text": "```json\n{\"ipv4\": [\"146[.]70[.]199[.]85\"], \"domains\": [\"login-paletrace[.]com\"], \"urls\": [], \"hashes\": [\"af898bd9bae1ef2fe746d17ae1268588696435877b44ac3baffb5c3820db1b9a\"]}\n```",
   "usage": {
     "input_tokens": 584,

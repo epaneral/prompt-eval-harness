@@ -2,6 +2,7 @@
   "model": "claude-sonnet-4-6",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "benign_context_domains_03_pos",
+  "input_sha256": "9c17d2fe1c79f763cae4d482473d929b27f8594660ae7cd07a3be356de10ba4d",
   "response_text": "{\"ipv4\": [\"91[.]201[.]66[.]18\"], \"domains\": [\"npm-telemetry-collector[.]org\"], \"urls\": [], \"hashes\": [\"875aab3fb9824bca9a3d5744ca9b3a55c11f86adaaa7406a987e3f0f667943a5\"]}",
   "usage": {
     "input_tokens": 590,

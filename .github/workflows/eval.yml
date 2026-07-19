@@ -1,0 +1,54 @@
+# Two jobs, deliberately separate:
+#   tests -- every push/PR, NO API key: a fresh clone must pass pytest from
+#            committed fixtures alone (definition-of-done from the brief).
+#   gates -- only when the eval surface changes (prompts/, corpus/, harness/,
+#            or the pinned artifacts). Uses the committed response cache, so
+#            it spends API money only on cases the change actually touched.
+#            Runs with --refresh-failing: a red must reproduce on fresh
+#            samples before it fails the build (ratified Checkpoint 2 rule).
+name: eval
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+
+  gates:
+    needs: tests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            eval:
+              - 'prompts/**'
+              - 'corpus/**'
+              - 'harness/**'
+              - 'baselines/**'
+              - 'cache/**'
+      - name: install
+        if: steps.changes.outputs.eval == 'true' || github.event_name == 'workflow_dispatch'
+        run: pip install -r requirements.txt
+      - name: gates
+        if: steps.changes.outputs.eval == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python -m harness.gates --refresh-failing

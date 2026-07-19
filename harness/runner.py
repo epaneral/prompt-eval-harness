@@ -159,22 +159,33 @@ def fetch_response(
     case_id: str,
     input_text: str,
 ) -> tuple[CachedResponse, bool]:
-    """Return (response, from_cache), writing the cache on a miss."""
+    """Return (response, from_cache), writing the cache on a miss.
+
+    A cached entry is only served if its recorded input hash matches the
+    case's current input text: the cache key alone is (prompt, model,
+    case_id), so without this check an edited corpus case would silently
+    reuse the response to its old wording.
+    """
     prompt_hash = prompt_sha256(prompt_text)
+    input_hash = hashlib.sha256(input_text.encode("utf-8")).hexdigest()
     path = cache_path(model, prompt_hash, case_id)
     if path.exists():
         data = json.loads(path.read_text(encoding="utf-8"))
-        usage = data["usage"]
-        return (
-            CachedResponse(data["response_text"], usage["input_tokens"], usage["output_tokens"]),
-            True,
-        )
+        if data.get("input_sha256") == input_hash:
+            usage = data["usage"]
+            return (
+                CachedResponse(
+                    data["response_text"], usage["input_tokens"], usage["output_tokens"]
+                ),
+                True,
+            )
     response = _call_api(client, model, prompt_text, input_text)
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "model": model,
         "prompt_sha256": prompt_hash,
         "case_id": case_id,
+        "input_sha256": input_hash,
         "response_text": response.response_text,
         "usage": {
             "input_tokens": response.input_tokens,

@@ -2,6 +2,7 @@
   "model": "claude-haiku-4-5",
   "prompt_sha256": "851e2d0c5151346d79d9b0bfffc4aa171ad69baec9d02a4ede5b7286edb55d04",
   "case_id": "defanged_03_pos",
+  "input_sha256": "5d13b268a367a78971c8a72332077b0743bbc231e314677d2fac8c3da708df94",
   "response_text": "```json\n{\"ipv4\": [\"146[.]70[.]111[.]9\"], \"domains\": [\"stage-loader[.]xyz\", \"cdn-sync[.]info\"], \"urls\": [\"hxxp://stage-loader[.]xyz/dl/a[.]bin\"], \"hashes\": []}\n```",
   "usage": {
     "input_tokens": 561,
