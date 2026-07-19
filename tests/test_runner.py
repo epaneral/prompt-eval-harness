@@ -4,10 +4,12 @@ Every design decision encoded here is documented in harness/runner.py's
 module docstring. The rules under test:
 
   * caching is structural -- a cache hit costs nothing and skips the API;
-  * parsing applies ONE documented transport normalization (a whole-payload
-    markdown fence is stripped and counted, not failed -- owner decision at
-    Checkpoint 2) and is otherwise strict: prose, partial fences, and
-    schema violations still fail;
+  * fence policy is PER-MODEL and baseline-derived (owner decision at
+    Checkpoint 2): models in FENCE_NORMALIZING_MODELS (Haiku) get one
+    whole-payload fence stripped before validation; every other model is
+    parsed strictly, so a fenced response there fails schema validity.
+    The observation is uniform: fenced responses are counted for every
+    model. Prose, partial fences, and schema violations fail everywhere;
   * a schema-invalid response grades as an EMPTY extraction (every
     expected indicator becomes a miss);
   * the cost cap is a hard abort on cumulative NEW spend;
@@ -349,7 +351,7 @@ def test_run_corpus_happy_path(
     assert stub.calls == 2
     assert result.schema_validity_rate == 1.0
     assert result.schema_invalid_cases == []
-    assert result.fence_normalized_cases == []
+    assert result.fenced_cases == []
     assert result.report.exact_match_rate == 1.0
     # Hand-computed: two calls at cost_usd(sonnet, 100, 40) each.
     per_call = cost_usd("claude-sonnet-4-6", 100, 40)
@@ -417,10 +419,12 @@ def test_run_corpus_schema_invalid_grades_as_empty(
     assert by_id["defanged_01_trap"].exact_match is True
 
 
-def test_run_corpus_fenced_response_normalized_and_counted(
+def test_run_corpus_fenced_fails_for_strict_model(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
-    """A whole-payload fence is stripped, graded normally, and counted."""
+    """Sonnet's baseline is fence-free: a fenced response is a deviation
+    from that baseline, so it fails schema validity (and still gets
+    recorded as an observation in fenced_cases)."""
     monkeypatch.setattr(runner, "CACHE_DIR", tmp_path / "cache")
     corpus = _build_corpus(tmp_path)
     fenced = "```json\n" + VALID_JSON + "\n```"
@@ -429,9 +433,30 @@ def test_run_corpus_fenced_response_normalized_and_counted(
 
     result = run_corpus(None, "claude-sonnet-4-6", "prompt v1", corpus)
 
-    assert result.schema_validity_rate == 1.0
+    assert result.fenced_cases == ["defanged_01_pos", "defanged_01_trap"]
+    assert result.schema_invalid_cases == ["defanged_01_pos", "defanged_01_trap"]
+    assert result.schema_validity_rate == 0.0
+    # Invalid grades as empty: the expected domain becomes a miss.
+    assert result.report.exact_match_rate == 0.0
+
+
+def test_run_corpus_fenced_normalized_for_fence_normalizing_model(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """Haiku's baseline established fencing as native framing: the fence is
+    stripped before validation, the case grades normally, and the
+    observation is still counted."""
+    monkeypatch.setattr(runner, "CACHE_DIR", tmp_path / "cache")
+    corpus = _build_corpus(tmp_path)
+    fenced = "```json\n" + VALID_JSON + "\n```"
+    stub = _ScriptedCall(CachedResponse(fenced, input_tokens=100, output_tokens=40))
+    monkeypatch.setattr(runner, "_call_api", stub)
+
+    result = run_corpus(None, "claude-haiku-4-5", "prompt v1", corpus)
+
+    assert result.fenced_cases == ["defanged_01_pos", "defanged_01_trap"]
     assert result.schema_invalid_cases == []
-    assert result.fence_normalized_cases == ["defanged_01_pos", "defanged_01_trap"]
+    assert result.schema_validity_rate == 1.0
     assert result.report.exact_match_rate == 1.0
 
 
@@ -491,7 +516,8 @@ def test_write_baseline(
     assert payload["prompt_sha256"] == prompt_sha256("prompt v1")
     assert payload["model"] == "claude-sonnet-4-6"
     assert payload["schema_validity_rate"] == 1.0
-    assert payload["fence_normalized_cases"] == []
+    assert payload["fenced_cases"] == []
+    assert payload["fence_policy"] == "strict"
 
     report = payload["report"]
     assert "per_type" in report

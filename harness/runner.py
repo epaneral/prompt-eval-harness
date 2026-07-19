@@ -8,15 +8,18 @@ grades from fixtures with no API key, and CI only spends money when the
 prompt or corpus actually changed. A cache hit costs nothing and cannot
 trip the cost cap.
 
-Parsing applies one documented TRANSPORT NORMALIZATION, then is strict.
-A markdown code fence wrapping the entire payload is form, not content --
-the same distinction the grader draws when it canonicalizes defanged
-indicators -- so exactly one whole-payload fence is stripped before
-validation (owner decision, Checkpoint 2). Nothing else is repaired:
-prose around the JSON, partial fences, or commentary still fail. The
-count of fence-normalized responses is reported (report-only) so a
-change in a model's framing behavior stays visible without being
-treated as a failure.
+Fence handling is PER-MODEL and baseline-derived (owner decision,
+Checkpoint 2). A markdown fence wrapping the entire payload is transport
+framing; whether it counts as a validity failure depends on the model's
+own pinned baseline behavior: a model whose baseline established fencing
+as its native framing (Haiku: 44/44 fenced) has the fence normalized
+away before validation, while a model whose baseline is fence-free
+(Sonnet: 0/44) is parsed strictly -- a fenced response there is a
+deviation from its own baseline and fails schema validity. The
+OBSERVATION is uniform either way: fenced responses are counted and
+listed for every model, so framing behavior stays comparable across
+models regardless of policy. Nothing else is ever repaired: prose
+around the JSON, partial fences, and commentary fail for every model.
 
 A schema-invalid response grades as an EMPTY extraction: an output the
 harness cannot parse extracts nothing, so every expected indicator counts
@@ -58,6 +61,10 @@ MODEL_PRICING: dict[str, tuple[float, float]] = {
 # records temperature as null -- the nondeterminism policy degrades from
 # "temperature 0" to "no sampling controls exposed; assume drift anyway".
 NO_SAMPLING_PARAMS = frozenset({"claude-opus-4-8"})
+# Baseline-derived fence policy: only models whose pinned baseline showed
+# fencing as their native framing get the fence normalized before validation.
+# Adding a model here requires probe-run evidence, like any other threshold.
+FENCE_NORMALIZING_MODELS = frozenset({"claude-haiku-4-5"})
 PRIMARY_MODEL = "claude-sonnet-4-6"
 TEMPERATURE = 0.0
 MAX_TOKENS = 1024
@@ -84,7 +91,9 @@ class RunResult:
     report: Report
     schema_invalid_cases: list[str]
     schema_validity_rate: float
-    fence_normalized_cases: list[str]
+    # Observation, not policy: every fenced response is recorded here for
+    # every model, whether or not the fence was normalized away.
+    fenced_cases: list[str]
     total_cost_usd: float
     api_calls: int
     cache_hits: int
@@ -192,7 +201,7 @@ def run_corpus(
     specs = load_manifest(corpus_dir / "manifest.yaml")
     triples = []
     schema_invalid: list[str] = []
-    fence_normalized: list[str] = []
+    fenced_cases: list[str] = []
     spent = 0.0
     api_calls = 0
     cache_hits = 0
@@ -213,7 +222,11 @@ def run_corpus(
                 )
         body, fenced = strip_transport_fence(response.response_text)
         if fenced:
-            fence_normalized.append(spec.id)
+            fenced_cases.append(spec.id)
+        if model not in FENCE_NORMALIZING_MODELS:
+            # Strict model: fencing deviates from its baseline, so the raw
+            # text is validated as-is and a fenced response fails.
+            body = response.response_text
         actual = parse_output(body)
         if actual is None:
             schema_invalid.append(spec.id)
@@ -223,7 +236,7 @@ def run_corpus(
         report=grade_corpus(triples),
         schema_invalid_cases=sorted(schema_invalid),
         schema_validity_rate=1 - len(schema_invalid) / len(specs),
-        fence_normalized_cases=sorted(fence_normalized),
+        fenced_cases=sorted(fenced_cases),
         total_cost_usd=spent,
         api_calls=api_calls,
         cache_hits=cache_hits,
@@ -241,7 +254,8 @@ def write_baseline(prompt_path: Path, prompt_text: str, model: str, result: RunR
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "schema_validity_rate": result.schema_validity_rate,
         "schema_invalid_cases": result.schema_invalid_cases,
-        "fence_normalized_cases": result.fence_normalized_cases,
+        "fenced_cases": result.fenced_cases,
+        "fence_policy": "normalize" if model in FENCE_NORMALIZING_MODELS else "strict",
         "total_cost_usd": round(result.total_cost_usd, 6),
         "api_calls": result.api_calls,
         "cache_hits": result.cache_hits,
@@ -266,9 +280,10 @@ def print_summary(result: RunResult, model: str, prompt_path: Path) -> None:
     )
     invalid = ", ".join(result.schema_invalid_cases) or "none"
     print(f"schema validity: {result.schema_validity_rate:.1%}   invalid: {invalid}")
+    policy = "normalize" if model in FENCE_NORMALIZING_MODELS else "strict"
     print(
-        f"transport-normalized (whole-payload fence stripped): "
-        f"{len(result.fence_normalized_cases)}/{len(report.cases)}"
+        f"fenced responses observed: {len(result.fenced_cases)}/{len(report.cases)}"
+        f"   (fence policy for this model: {policy})"
     )
     print(f"exact-match rate: {report.exact_match_rate:.1%}")
     print("per-type (micro-averaged):")
