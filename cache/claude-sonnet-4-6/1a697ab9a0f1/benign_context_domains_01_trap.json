@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "benign_context_domains_01_trap",
+  "input_sha256": "5a2d838cbdc521fcb904f01e385440d022ec477ff59aca0b249dbd75938c635c",
+  "response_text": "{\"ipv4\": [\"45[.]153[.]240[.]17\"], \"domains\": [\"pypi-secure-mirror[.]net\", \"pypi[.]org\"], \"urls\": [], \"hashes\": [\"9a12cdd17cd9e8392164c7ea45466baf\"]}",
+  "usage": {
+    "input_tokens": 420,
+    "output_tokens": 71
+  }
+}

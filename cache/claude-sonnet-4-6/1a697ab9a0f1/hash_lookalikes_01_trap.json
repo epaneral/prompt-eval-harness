@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "hash_lookalikes_01_trap",
+  "input_sha256": "34cf791dbf77f5bc2225bc65721e0bcfc589040b0c43b071e9ebe2f589da30e9",
+  "response_text": "{\"ipv4\": [\"185[.]216[.]71[.]44\"], \"domains\": [\"cdn-silverquill[.]net\"], \"urls\": [\"hxxps://cdn-silverquill[.]net/loader.bin\"], \"hashes\": [\"053d2bcc2f45bd87e5570b3b0ce4bcbdd0b62ea6\", \"2ae589639ba39c4f7e4292bc5f8e8c031ed68236\"]}",
+  "usage": {
+    "input_tokens": 453,
+    "output_tokens": 114
+  }
+}

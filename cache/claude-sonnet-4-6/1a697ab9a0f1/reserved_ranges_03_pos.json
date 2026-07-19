@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "reserved_ranges_03_pos",
+  "input_sha256": "3a120fe857941d0285477638c17d1ad07588f71c9265034b6189afb8c8460b0d",
+  "response_text": "{\"ipv4\": [], \"domains\": [\"cdn-refresh-static[.]com\"], \"urls\": [\"hxxps://cdn-refresh-static[.]com/pack/loader.bin\"], \"hashes\": [\"80daa4867214a8814a88e76a862262a16e074c4cd82c3da1e44d8af49d3bf93a\"]}",
+  "usage": {
+    "input_tokens": 406,
+    "output_tokens": 91
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "hash_lookalikes_02_pos",
+  "input_sha256": "8ddae8341baf2599615aa559d526bbb9cffdd76aa6dad7cc98a175ac55ebfe60",
+  "response_text": "{\"ipv4\": [\"45[.]142[.]212[.]19\"], \"domains\": [\"grip-analytics[.]org\"], \"urls\": [], \"hashes\": [\"a0c7d4f3140e9f13469e7c5ad25d3fe2\"]}",
+  "usage": {
+    "input_tokens": 398,
+    "output_tokens": 66
+  }
+}

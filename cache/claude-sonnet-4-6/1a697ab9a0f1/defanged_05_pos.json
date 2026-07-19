@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-6",
+  "prompt_sha256": "1a697ab9a0f183bcb1e4cba2a9d1165b4cab949ae80752007e231b6304aeea0d",
+  "case_id": "defanged_05_pos",
+  "input_sha256": "466c029e84063b96b83accf339533735a89fd73098a881615f2d979c180e756a",
+  "response_text": "{\"ipv4\": [\"193[.]29[.]104[.]66\"], \"domains\": [\"delivery-cache[.]net\"], \"urls\": [], \"hashes\": []}",
+  "usage": {
+    "input_tokens": 374,
+    "output_tokens": 41
+  }
+}
