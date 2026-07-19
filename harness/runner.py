@@ -26,6 +26,17 @@ harness cannot parse extracts nothing, so every expected indicator counts
 as a miss. Schema validity is also reported separately (it is its own
 gate). This choice is flagged for owner ratification at Checkpoint 2.
 
+Denominators are labeled, not blended (owner direction). Exact-match is
+reported twice -- over all cases (invalid counts as a miss; the fixed
+denominator the no-regression gate needs) and over schema-valid outputs
+only (the pure extraction-quality view). The trap metric is CONDITIONED
+on validity: an unparseable trap response is not a trap "success", so
+the rate is leaking traps / schema-valid traps, n/a (fail-closed) when
+no trap produced valid output. Recall and per-type metrics deliberately
+stay unconditional: computed over valid outputs only, they could be
+improved by breaking formatting on hard cases -- the excluded-denominator
+failure mode this design rejects.
+
 The cost cap is a hard abort on cumulative NEW spend within one run
 (cache hits are free). It is a runaway brake, not a budget plan.
 
@@ -94,6 +105,12 @@ class RunResult:
     # Observation, not policy: every fenced response is recorded here for
     # every model, whether or not the fence was normalized away.
     fenced_cases: list[str]
+    # Conditioned views: denominators restricted to schema-valid outputs,
+    # None (never coerced) when the denominator is empty.
+    n_valid_cases: int
+    n_valid_traps: int
+    exact_match_rate_valid: float | None
+    trap_fp_case_rate_valid: float | None
     total_cost_usd: float
     api_calls: int
     cache_hits: int
@@ -232,11 +249,27 @@ def run_corpus(
             schema_invalid.append(spec.id)
             actual = IOCExtraction(ipv4=[], domains=[], urls=[], hashes=[])
         triples.append((spec, expected, actual))
+    report = grade_corpus(triples)
+    invalid_ids = set(schema_invalid)
+    valid_grades = [g for g in report.cases if g.case_id not in invalid_ids]
+    valid_traps = [g for g in valid_grades if g.role == "trap"]
+    # trap_fp_cases can only contain valid cases (an empty extraction cannot
+    # falsely extract), so the conditioned numerator is the same list.
     return RunResult(
-        report=grade_corpus(triples),
+        report=report,
         schema_invalid_cases=sorted(schema_invalid),
         schema_validity_rate=1 - len(schema_invalid) / len(specs),
         fenced_cases=sorted(fenced_cases),
+        n_valid_cases=len(valid_grades),
+        n_valid_traps=len(valid_traps),
+        exact_match_rate_valid=(
+            sum(g.exact_match for g in valid_grades) / len(valid_grades)
+            if valid_grades
+            else None
+        ),
+        trap_fp_case_rate_valid=(
+            len(report.trap_fp_cases) / len(valid_traps) if valid_traps else None
+        ),
         total_cost_usd=spent,
         api_calls=api_calls,
         cache_hits=cache_hits,
@@ -256,6 +289,10 @@ def write_baseline(prompt_path: Path, prompt_text: str, model: str, result: RunR
         "schema_invalid_cases": result.schema_invalid_cases,
         "fenced_cases": result.fenced_cases,
         "fence_policy": "normalize" if model in FENCE_NORMALIZING_MODELS else "strict",
+        "n_valid_cases": result.n_valid_cases,
+        "n_valid_traps": result.n_valid_traps,
+        "exact_match_rate_valid": result.exact_match_rate_valid,
+        "trap_fp_case_rate_valid": result.trap_fp_case_rate_valid,
         "total_cost_usd": round(result.total_cost_usd, 6),
         "api_calls": result.api_calls,
         "cache_hits": result.cache_hits,
@@ -285,13 +322,30 @@ def print_summary(result: RunResult, model: str, prompt_path: Path) -> None:
         f"fenced responses observed: {len(result.fenced_cases)}/{len(report.cases)}"
         f"   (fence policy for this model: {policy})"
     )
-    print(f"exact-match rate: {report.exact_match_rate:.1%}")
-    print("per-type (micro-averaged):")
+    print(f"exact-match (all cases; invalid counts as miss): {report.exact_match_rate:.1%}")
+    valid_em = (
+        "n/a"
+        if result.exact_match_rate_valid is None
+        else f"{result.exact_match_rate_valid:.1%}"
+    )
+    print(
+        f"exact-match (schema-valid outputs, n={result.n_valid_cases}/{len(report.cases)}): "
+        f"{valid_em}"
+    )
+    print("per-type (micro-averaged, all cases -- see docstring):")
     for t, m in report.per_type.items():
         print(f"  {t:<8} P={_fmt(m.precision)}  R={_fmt(m.recall)}  F1={_fmt(m.f1)}")
-    rate = "n/a" if report.trap_fp_case_rate is None else f"{report.trap_fp_case_rate:.1%}"
+    total_traps = sum(1 for g in report.cases if g.role == "trap")
+    rate = (
+        "n/a"
+        if result.trap_fp_case_rate_valid is None
+        else f"{result.trap_fp_case_rate_valid:.1%}"
+    )
     offenders = ", ".join(report.trap_fp_cases) or "none"
-    print(f"trap false-extraction case rate: {rate}   offending: {offenders}")
+    print(
+        f"trap false-extraction rate (schema-valid traps, n={result.n_valid_traps}/{total_traps}): "
+        f"{rate}   offending: {offenders}"
+    )
     print("failure concentration by category (fp/fn summed over types):")
     for category, counts in report.by_category.items():
         fp = sum(c.fp for c in counts.values())

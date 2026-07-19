@@ -353,6 +353,11 @@ def test_run_corpus_happy_path(
     assert result.schema_invalid_cases == []
     assert result.fenced_cases == []
     assert result.report.exact_match_rate == 1.0
+    # Conditioned views equal the unconditioned ones at 100% validity.
+    assert result.n_valid_cases == 2
+    assert result.n_valid_traps == 1
+    assert result.exact_match_rate_valid == 1.0
+    assert result.trap_fp_case_rate_valid == 0.0
     # Hand-computed: two calls at cost_usd(sonnet, 100, 40) each.
     per_call = cost_usd("claude-sonnet-4-6", 100, 40)
     assert result.total_cost_usd == pytest.approx(2 * per_call)
@@ -418,6 +423,16 @@ def test_run_corpus_schema_invalid_grades_as_empty(
     # The valid case still matches exactly.
     assert by_id["defanged_01_trap"].exact_match is True
 
+    # Conditioned views: denominators shrink to the valid subset and say so.
+    # The invalid pos case is excluded here (and labeled), NOT counted as
+    # a success -- the valid trap matched, so both conditioned rates are
+    # clean while the all-cases exact-match is 0.5.
+    assert result.n_valid_cases == 1
+    assert result.n_valid_traps == 1
+    assert result.exact_match_rate_valid == 1.0
+    assert result.trap_fp_case_rate_valid == 0.0
+    assert result.report.exact_match_rate == 0.5
+
 
 def test_run_corpus_fenced_fails_for_strict_model(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
@@ -438,6 +453,12 @@ def test_run_corpus_fenced_fails_for_strict_model(
     assert result.schema_validity_rate == 0.0
     # Invalid grades as empty: the expected domain becomes a miss.
     assert result.report.exact_match_rate == 0.0
+    # No valid outputs at all: conditioned metrics are None (fail-closed),
+    # never a flattering 0% trap rate over unparseable traps.
+    assert result.n_valid_cases == 0
+    assert result.n_valid_traps == 0
+    assert result.exact_match_rate_valid is None
+    assert result.trap_fp_case_rate_valid is None
 
 
 def test_run_corpus_fenced_normalized_for_fence_normalizing_model(
@@ -518,6 +539,10 @@ def test_write_baseline(
     assert payload["schema_validity_rate"] == 1.0
     assert payload["fenced_cases"] == []
     assert payload["fence_policy"] == "strict"
+    assert payload["n_valid_cases"] == 2
+    assert payload["n_valid_traps"] == 1
+    assert payload["exact_match_rate_valid"] == 1.0
+    assert payload["trap_fp_case_rate_valid"] == 0.0
 
     report = payload["report"]
     assert "per_type" in report
