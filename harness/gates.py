@@ -39,6 +39,7 @@ import anthropic
 from harness.grader import INDICATOR_TYPES
 from harness.runner import (
     BASELINES_DIR,
+    MODEL_PRICING,
     PRIMARY_MODEL,
     ROOT,
     RunResult,
@@ -162,7 +163,7 @@ def _print_verdict(gates: list[GateResult], label: str) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Evaluate regression gates.")
-    parser.add_argument("--model", default=PRIMARY_MODEL)
+    parser.add_argument("--model", default=PRIMARY_MODEL, choices=sorted(MODEL_PRICING))
     parser.add_argument("--prompt", default=str(ROOT / "prompts" / "v1.md"))
     parser.add_argument(
         "--refresh-failing",

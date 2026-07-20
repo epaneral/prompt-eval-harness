@@ -170,15 +170,21 @@ def fetch_response(
     input_hash = hashlib.sha256(input_text.encode("utf-8")).hexdigest()
     path = cache_path(model, prompt_hash, case_id)
     if path.exists():
-        data = json.loads(path.read_text(encoding="utf-8"))
-        if data.get("input_sha256") == input_hash:
-            usage = data["usage"]
-            return (
-                CachedResponse(
-                    data["response_text"], usage["input_tokens"], usage["output_tokens"]
-                ),
-                True,
-            )
+        # Fail loud on a corrupt entry rather than silently re-fetching:
+        # the cache is a committed, reviewed artifact, and re-buying the
+        # response would mask the corruption (and spend money doing it).
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            if data.get("input_sha256") == input_hash:
+                usage = data["usage"]
+                return (
+                    CachedResponse(
+                        data["response_text"], usage["input_tokens"], usage["output_tokens"]
+                    ),
+                    True,
+                )
+        except (json.JSONDecodeError, KeyError, TypeError) as e:
+            raise RuntimeError(f"corrupt cache entry: {path}") from e
     response = _call_api(client, model, prompt_text, input_text)
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
