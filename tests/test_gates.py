@@ -31,6 +31,7 @@ import pytest
 import harness.runner as runner
 from harness.gates import (
     GateResult,
+    _check_floor,
     evaluate_gates,
     failing_case_ids,
     refresh_cases,
@@ -351,3 +352,25 @@ def test_refresh_cases_deletes_named_and_tolerates_missing(
     refresh_cases(model, prompt_text, ["never_cached"])
     # And the still-cached trap file is left in place by that no-op call.
     assert trap_path.exists()
+
+
+# --- 8. _check_floor boundaries: fail-closed None, inclusive floor ----------
+
+
+def test_check_floor_none_fails_closed_with_given_detail() -> None:
+    passed, detail = _check_floor(None, 1.0, "recall undefined (fail-closed)")
+    assert passed is False
+    assert detail == "recall undefined (fail-closed)"
+
+
+def test_check_floor_exactly_at_floor_passes() -> None:
+    # The floor is inclusive: a metric AT the floor is not a regression.
+    passed, detail = _check_floor(1.0, 1.0, "unused")
+    assert passed is True
+    assert detail == "1.000"
+
+
+def test_check_floor_just_below_floor_fails() -> None:
+    passed, detail = _check_floor(0.999, 1.0, "unused")
+    assert passed is False
+    assert detail == "0.999"
