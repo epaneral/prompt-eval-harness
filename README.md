@@ -1,6 +1,6 @@
 # prompt-eval-harness
 
-An evaluation and regression-gating harness for an LLM extraction task — built to answer the question every team shipping LLM-powered automation eventually hits: how do you know a prompt change made things better, and how do you stop one that made things worse?
+An evaluation and regression-gating harness for an LLM extraction task.
 
 The harness owns the full evaluation stack: a hand-curated adversarial corpus, deterministic grading with no LLM-as-judge, gate thresholds derived from measured baselines and a drift study, and CI gates that turn red — reproducibly — when the prompt regresses.
 
@@ -10,6 +10,3 @@ The proof it works is a deliberately broken PR. The regression-demo branch commi
 
 All corpus indicators are fabricated; any resemblance to registered infrastructure is coincidental. This corpus is not threat intelligence.
 
----
-
-Status: Phases 1–4 complete — gates live in CI, regression demo on the `regression-demo` branch. Decision history in [CHANGELOG.md](CHANGELOG.md); design brief in [prompt_eval_harness_brief.md](prompt_eval_harness_brief.md).
